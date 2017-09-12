@@ -1,0 +1,21 @@
+.label {
+    display: flex;
+    align-items: stretch;
+}
+
+.label span {
+    font-family: 'Roboto', sans-serif;
+
+    padding: 0.35rem;
+    border: 1px solid #aaa;
+    border-radius: 4px 0 0 4px;
+    background-color: #eee;
+}
+
+.label input {
+    border: 1px solid #aaa;
+    border-left: none;
+
+    border-radius: 0 4px 4px 0;
+    padding: 0.35rem;
+}
