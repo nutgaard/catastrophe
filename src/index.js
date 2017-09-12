@@ -5,6 +5,7 @@ import Header from './components/header';
 import Main from './components/main';
 import Aside from './components/aside';
 import Footer from './components/footer';
+import StateProvider from './state/provider';
 import './reset.css'
 import './layout.css'
 import './typography.css'
@@ -51,13 +52,16 @@ const calcdamage = pascalTriangle.then((pascal) => Webworker.exec(damage, { T: 2
     .then((res) => { console.log('res', res); console.timeEnd('calc')});
 
 function App() {
+
     return (
-        <Group>
-            <Header/>
-            <Main/>
-            <Aside/>
-            <Footer/>
-        </Group>
+        <StateProvider>
+            <Group>
+                <Header/>
+                <Main/>
+                <Aside/>
+                <Footer/>
+            </Group>
+        </StateProvider>
     )
 }
 
