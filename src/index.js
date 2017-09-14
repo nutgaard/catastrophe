@@ -12,47 +12,18 @@ import './typography.css'
 import './utils.css'
 import './main.css'
 
-import Webworker from './webworker';
-
-function pascal(height) {
-    const rows = new Array(height);
-    rows[0] = [1];
-    rows[1] = [1, 1];
-
-    for (let i = 2; i < height; i++) {
-        const prevRow = rows[i - 1];
-        const currentRow = [1];
-        for (let j = 1; j < prevRow.length; j++) {
-            currentRow.push(prevRow[j - 1] + prevRow[j]);
-        }
-        currentRow.push(1);
-        rows[i] = currentRow;
-    }
-
-    return rows;
-}
-
-function damage({ T, c, p, pascal }) {
-    let sum = 0;
-    for (let k = 0; k <= T; k++) {
-        for (let a = 1; a <= k; a++) {
-            sum += pascal[T][k] * c * Math.pow(p, a);
-        }
-    }
-
-    return sum;
-}
+import pascal from './pascal';
+import damagecalc from './damagecalc';
 
 console.time('calc');
 console.time('pascal');
-const pascalTriangle = Webworker.exec(pascal, 50)
+const pascalTriangle = pascal(50)
     .then((res) => { console.timeEnd('pascal'); return res; });
 
-const calcdamage = pascalTriangle.then((pascal) => Webworker.exec(damage, { T: 20, c: 1, p: 0.0001, pascal }))
+const calcdamage = pascalTriangle.then((pascal) => damagecalc({T: 20, c: 1, p:0.0001, pascal}))
     .then((res) => { console.log('res', res); console.timeEnd('calc')});
 
 function App() {
-
     return (
         <StateProvider>
             <Group>
