@@ -130,17 +130,17 @@ class Graph extends Component {
         const viewBox = `0 0 ${xSize} ${ySize}`;
         const tree = generateTree2(T);
 
-        const nodes = treeMap(tree, ({x, y}) => <SvgNode x={x} y={y}/>);
+        const nodes = treeMap(tree, ({x, y}) => <SvgNode x={x} y={y} key={`${x}-${y}`}/>);
         const edges = treeMap(tree, (node) => {
             if (node.children.length !== 2) {
                 return [];
             }
 
             return [
-                <SvgEdge coors={[node.x, node.y, node.children[0].x, node.children[0].y]}/>,
-                <SvgEdge coors={[node.x, node.y, node.children[1].x, node.children[1].y]}/>,
-                <SvgText text="K" x={avg(node.x, node.children[0].x)+2} y={avg(node.y, node.children[0].y)+2} />,
-                <SvgText text="N" x={avg(node.x, node.children[1].x)-10} y={avg(node.y, node.children[1].y)+2} />
+                <SvgEdge coors={[node.x, node.y, node.children[0].x, node.children[0].y]} key={`${node.x}-${node.y}-edge1`} />,
+                <SvgEdge coors={[node.x, node.y, node.children[1].x, node.children[1].y]} key={`${node.x}-${node.y}-edge2`} />,
+                <SvgText text="K" x={avg(node.x, node.children[0].x)+2} y={avg(node.y, node.children[0].y)+2} key={`${node.x}-${node.y}-text1`} />,
+                <SvgText text="N" x={avg(node.x, node.children[1].x)-10} y={avg(node.y, node.children[1].y)+2} key={`${node.x}-${node.y}-text2`} />
             ]
         }).reduce((list, edges) => [...list, ...edges], []);
 

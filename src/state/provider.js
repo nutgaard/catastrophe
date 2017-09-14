@@ -1,15 +1,32 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+
+import pascal from "./../pascal";
+import damagecalc from "./../damagecalc";
+
+function calc({T, c, p}) {
+    return pascal(T + 1).then((pascal) => damagecalc({T, c, p, pascal}));
+}
+
+function enrich(state) {
+    return {
+        ...state,
+        damage: calc(state)
+    }
+}
 
 class StateProvider extends Component {
     state = {
-        T: 4
+        T: 4,
+        c: 5,
+        p: 0.5,
+        damage: null
     };
 
     updateState = (newState) => this.setState(newState);
 
     getChildContext() {
-        return { state: this.state, updateState: this.updateState };
+        return {state: enrich(this.state), updateState: this.updateState};
     }
 
     render() {

@@ -12,17 +12,6 @@ import './typography.css'
 import './utils.css'
 import './main.css'
 
-import pascal from './pascal';
-import damagecalc from './damagecalc';
-
-console.time('calc');
-console.time('pascal');
-const pascalTriangle = pascal(50)
-    .then((res) => { console.timeEnd('pascal'); return res; });
-
-const calcdamage = pascalTriangle.then((pascal) => damagecalc({T: 20, c: 1, p:0.0001, pascal}))
-    .then((res) => { console.log('res', res); console.timeEnd('calc')});
-
 function App() {
     return (
         <StateProvider>
