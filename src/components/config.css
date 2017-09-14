@@ -1,8 +1,10 @@
 .config {
     display: flex;
+    flex-wrap: wrap;
     margin: 0 -0.5rem;
+
 }
 
 .config label {
-    margin: 0 0.5rem;
+    margin: 0 0.5rem 1rem;
 }
