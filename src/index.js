@@ -11,6 +11,16 @@ import './typography.css'
 import './utils.css'
 import './main.css'
 
+import Webworker from './webworker';
+
+const workerFn = (args) => {
+    debugger;
+    return args.map((i) => i * 2)
+};
+
+Webworker.exec(workerFn, [1, 2, 3])
+    .then((res) => console.log('res', res));
+
 function App() {
     return (
         <Group>
