@@ -27,8 +27,6 @@ class Webworker {
             worker.postMessage({ action: fn.toString(), args: data })
         });
     }
-
-
 }
 
 export default Webworker;
